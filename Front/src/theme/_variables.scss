@@ -1,0 +1,57 @@
+$primary-color : #03A9F4;
+
+$secondary-color : #333;
+
+$error-color : rgba(244, 67, 54, 0.92);
+$success-color: #a7cb40;
+$dark-grey: #3c3838;
+$light-grey: #f7f7f7;
+$medium-grey: rgba(0, 0, 0, 0.12);
+$section-grey: #f0f0f0;
+$contrast-color: #fafafa;
+$font: "Droid Arabic Kufi", "Cairo", sans-serif ;
+$font-small-size: 18px;
+$font-medium-size: 20px;
+$font-large-size: 22px;
+$font-xlarge-size:27px;
+$font-xxlarge-size:37px;
+$font-xxxlarge-size:48px;
+$background-color : #f8f8f8;
+$spacing: 18px;
+
+$tab-break-point: 900px;
+$mobile-break-point: 600px;
+
+$round-border-radius: 20px;
+
+
+$horizontal-divider-color : #D4D4D4;
+
+//placeholder
+$placeholder-color: #757575;
+
+//header && footer
+$header-height: 50px;
+$header-text-color: #acacac;
+$header-background-color: #424242;
+$header-border-bottom-color: $primary-color;
+$header-mobile-menu-breakpoint: 900px;
+
+$footer-text-color: $header-text-color;
+$footer-background-color: $header-background-color;
+$footer-border-bottom-color: $header-border-bottom-color;
+
+//table
+$table-header-background-color:rgba(32, 32, 32, 0.87);
+$table-header-color:#f0f0f0;
+$table-border-color: $table-header-color;
+
+//cards
+$cards-text-color: #666666;
+$cards-text-color-light: #b3b3b3;
+
+//icons
+$edit-icon-background-color: #267eea;
+$delete-icon-background-color: #e23045;
+$new-icon-background-color: #4caf50;
+$action-icon-color: $table-header-color;

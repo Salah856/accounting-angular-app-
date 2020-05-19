@@ -1,0 +1,10 @@
+<button class="menu-item icon-only"
+        mat-button color="primary"
+        [matMenuTriggerFor]="userMenu">
+  <img [src]="imageUrl ? imageUrl : 'assets/imgs/default-grey.png'" alt="user" class="profile-pic" width="30" height="30" />
+</button>
+
+<mat-menu #userMenu="matMenu" overlapTrigger="false">
+	<p class="profile-name">{{name}}</p>
+  <button (click)="onLogout()" mat-menu-item >{{'LOGOUT' |  translate}}</button>
+</mat-menu>

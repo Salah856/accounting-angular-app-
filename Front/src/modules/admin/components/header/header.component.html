@@ -1,0 +1,9 @@
+<div class="section">
+  <img src="assets/imgs/logo.png" alt="logo" class="logo">
+  <acc-full-menu [menuItems]="menuItems"></acc-full-menu>
+</div>
+<div class="section">
+  <acc-language-switcher  (toggleLang)="switchLanguage()" [currentLanguage]="lang" [langs]="langs" ></acc-language-switcher>
+  <acc-user-btn [name]="username" [imageUrl]="imageUrl" (logout)="onLogout()" ></acc-user-btn>
+  <acc-mobile-menu [menuItems]="menuItems"></acc-mobile-menu>
+</div>

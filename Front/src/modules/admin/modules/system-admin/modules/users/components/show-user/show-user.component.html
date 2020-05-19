@@ -1,0 +1,95 @@
+<mat-card class="acc-section round-borders margin-md-a">
+  <!-- <mat-card-header class="flex center-h">
+    <mat-card-title class="section-sub-header flex text-large">{{ 'USER_DETAILS' | translate }}</mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider> -->
+  <mat-card-content class="margin-md-t-b">
+    <div class="error" *ngFor="let error of errors">
+      {{error | serverTranslate : lang}}
+    </div>
+    <mat-tab-group (selectedIndexChange)="onSelectedIndexChange($event)">
+      <mat-tab [label]="'USER_DETAILS' | translate">
+        <div class="flex column margin-md-t">
+          <div class="flex wrap center-v">
+            <div class="flex padding-md-a data-row fill">
+              <label class="data-row-label padding-sm-l-r">{{'ID' | translate}}</label>
+              <span class="data-row-separator padding-sm-l-r">:</span>
+              <span class="padding-sm-l-r">{{user._id}}</span>
+            </div>
+            <div class="flex padding-md-a data-row fill">
+              <label class="data-row-label padding-sm-l-r">{{'USER_FULLNAME' | translate}}</label>
+              <span class="data-row-separator padding-sm-l-r">:</span>
+              <span class="padding-sm-l-r">{{user.name}}</span>
+            </div>
+          </div>
+          <div class="flex wrap center-v">
+            <div class="flex padding-md-a data-row fill">
+              <label class="data-row-label padding-sm-l-r">{{'USERNAME' | translate}}</label>
+              <span class="data-row-separator padding-sm-l-r">:</span>
+              <span class="padding-sm-l-r">{{user.username}}</span>
+            </div>
+            <div class="flex padding-md-a data-row fill">
+              <label class="data-row-label padding-sm-l-r">{{'ACTIVE' | translate}}</label>
+              <span class="data-row-separator padding-sm-l-r">:</span>
+              <span class="padding-sm-l-r">{{user.active?.label | serverTranslate : lang}}</span>
+            </div>
+          </div>
+          <div class="flex wrap center-v">
+            <div class="flex padding-md-a data-row fill">
+              <label class="data-row-label padding-sm-l-r">{{'EMAIL' | translate}}</label>
+              <span class="data-row-separator padding-sm-l-r">:</span>
+              <span class="padding-sm-l-r">{{user.email}}</span>
+            </div>
+            <div class="flex padding-md-a data-row fill">
+              <label class="data-row-label padding-sm-l-r">{{'PHONE_NUMBERS' | translate}}</label>
+              <span class="data-row-separator padding-sm-l-r">:</span>
+              <span *ngFor="let phoneNumber of user.phoneNumbers" class="padding-sm-l-r">{{phoneNumber}}</span>
+            </div>
+          </div>
+          <div class="flex padding-md-a data-row">
+            <label class="data-row-label padding-sm-l-r">{{'PROFILE_IMAGE' | translate}}</label>
+            <span class="data-row-separator padding-sm-l-r">:</span>
+            <img *ngIf="imageUrl" class="data-row-image padding-sm-l-r" [src]="imageUrl" alt="">
+          </div>
+          <acc-signature [signature]="user.signature"></acc-signature>
+        </div>
+        <div class="flex fill padding-md-a end-h">
+          <button *ngIf="rights?.PUT" class="margin-sm-l-r" mat-raised-button color="primary" [routerLink]="['../edit', user._id]">{{'EDIT' |
+              translate}}</button>
+          <button *ngIf="rights?.DELETE" class="margin-sm-l-r" mat-raised-button color="warn" (click)="confirmDeleteUser()">{{'DELETE' |
+              translate}}</button>
+          <button class="margin-sm-l-r" mat-raised-button color="accent"
+            [routerLink]="['../']">{{'BACK' | translate}}</button>
+        </div>
+      </mat-tab>
+      <mat-tab [label]="'USER_RIGHTS' | translate">
+        <acc-responsive-table class="margin-md-t" [clickable]="false" [data]="user.userRights" [lang]="lang"
+          [columns]="rightColumns" [translate]="true" [selectColumns]="true" (sort)="onSort($event)">
+          <ng-template #column let-value let-index="index" let-item="item">
+            {{  getTotalName(value) | serverTranslate: lang }}
+          </ng-template>
+          <ng-template #column let-value let-index="index" let-item="item">
+            {{  value ? (getTotalName(value) | serverTranslate: lang) : '*' }}
+          </ng-template>
+          <ng-template #column let-value let-index="index" let-item="item">
+            <ng-container *ngFor="let item of value; let idx=index;">
+              <span class="margin-l-r">
+                {{ item.name | serverTranslate: lang }}
+              </span>
+              <span *ngIf="idx < value.length - 1"> - </span>
+            </ng-container>
+          </ng-template>
+        </acc-responsive-table>
+        <div class="flex fill padding-md-a end-h">
+          <button *ngIf="rights?.PUT" class="margin-sm-l-r" mat-raised-button color="primary" [routerLink]="['../rights/edit', user._id]" >{{'EDIT_RIGHTS' |
+                    translate}}</button>
+          <button *ngIf="user.userRights?.length > 0 && rights?.DELETE" class="margin-sm-l-r" mat-raised-button color="warn" (click)="confirmDeleteUserRights()">{{'DELETE_RIGHTS' |
+                    translate}}</button>
+          <button class="margin-sm-l-r" mat-raised-button color="accent"
+            [routerLink]="['../']">{{'BACK' | translate}}</button>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+    <acc-loading *ngIf="isLoading"></acc-loading>
+  </mat-card-content>
+</mat-card>

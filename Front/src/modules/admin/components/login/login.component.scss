@@ -1,0 +1,18 @@
+@import "../../../../theme/variables";
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-image: url('/assets/imgs/login-background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: $dark-grey;
+    background-position: center;
+    mat-card {
+        width: 80%;
+        max-width: 400px;
+        z-index: 50;
+    }
+
+}

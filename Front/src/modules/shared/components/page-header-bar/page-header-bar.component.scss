@@ -1,0 +1,25 @@
+@import "../../../../theme/variables";
+
+:host{
+  background-color: $background-color;
+  padding: 15px $spacing;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  .page-header{
+    color: $cards-text-color;
+    margin: 0;
+    font-weight: 400;
+    &-subtext{
+      color: $cards-text-color-light;
+      font-size: 13px;
+    }
+  }
+
+  @media (max-width: $header-mobile-menu-breakpoint){
+    background-color: transparent;
+    margin-bottom: 0;
+  }
+}

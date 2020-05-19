@@ -1,0 +1,64 @@
+<mat-card class="acc-section round-borders margin-md-a">
+  <mat-card-header class="flex center-h">
+    <mat-card-title class="section-sub-header flex text-large">{{ 'ADDING_PERMISSION_DETAILS' | translate }}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content class="margin-md-t-b">
+    <div class="error" *ngFor="let error of errors">
+      {{error | serverTranslate : lang}}
+    </div>
+    <div class="flex column">
+      <div class="flex wrap center-v">
+        <div class="flex padding-md-a data-row fill">
+          <label class="data-row-label padding-sm-l-r">{{'ID' | translate}}</label>
+          <span class="data-row-separator padding-sm-l-r">:</span>
+          <span class="padding-sm-l-r">{{addingPermission._id}}</span>
+        </div>
+        <div class="flex padding-md-a data-row fill">
+          <label class="data-row-label padding-sm-l-r">{{'ADDING_PERMISSION_DATE' | translate}}</label>
+          <span class="data-row-separator padding-sm-l-r">:</span>
+          <span class="padding-sm-l-r">{{addingPermission.date | localDate:locale }}</span>
+        </div>
+      </div>
+      <div class="flex wrap center-v">
+        <div class="flex padding-md-a data-row fill">
+          <label class="data-row-label padding-sm-l-r">{{'STORE' | translate}}</label>
+          <span class="data-row-separator padding-sm-l-r">:</span>
+          <span class="padding-sm-l-r">{{ addingPermission.store?.name }}</span>
+        </div>
+        <div class="flex padding-md-a data-row fill">
+          <label class="data-row-label padding-sm-l-r">{{'STORE_SECRETARY' | translate}}</label>
+          <span class="data-row-separator padding-sm-l-r">:</span>
+          <span class="padding-sm-l-r">{{addingPermission.storeSecretary}}</span>
+        </div>
+      </div>
+      <div class="flex wrap center-v">
+        <div class="flex padding-md-a data-row fill">
+          <label class="data-row-label padding-sm-l-r">{{'NOTES' | translate}}</label>
+          <span class="data-row-separator padding-sm-l-r">:</span>
+          <span class="padding-sm-l-r">{{addingPermission.notes}}</span>
+        </div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <span class="flex margin-md-t form-section-header"> {{ ('ITEMS' | translate) + ' : ' }} </span>
+    <acc-responsive-table *ngIf="addingPermission.addedItems" [data]="addingPermission.addedItems" [clickable]="false"
+      [lang]="lang" [columns]="columns" [translate]="true" [sortDisabled]="true">
+    </acc-responsive-table>
+    <acc-signature [signature]="addingPermission.signature"></acc-signature>
+    <acc-loading *ngIf="isLoading"></acc-loading>
+  </mat-card-content>
+  <mat-card-actions>
+    <div class="flex fill padding-md-a end-h">
+      <button *ngIf="rights?.PUT" class="margin-sm-l-r" mat-raised-button color="primary"
+        [routerLink]="['../edit', addingPermission._id]">{{'EDIT' |
+        translate}}</button>
+      <button *ngIf="rights?.DELETE" class="margin-sm-l-r" mat-raised-button color="warn"
+        (click)="confirmDeleteAddingPermission()">{{'DELETE' |
+        translate}}</button>
+      <button class="margin-sm-l-r" mat-raised-button color="accent"
+        [routerLink]="['../']">{{'BACK' | translate}}</button>
+    </div>
+  </mat-card-actions>
+</mat-card>

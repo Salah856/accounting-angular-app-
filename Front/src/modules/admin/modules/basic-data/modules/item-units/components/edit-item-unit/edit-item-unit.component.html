@@ -1,0 +1,30 @@
+<acc-page-header-bar title="{{ (itemUnitId ? 'EDIT_ITEM_UNIT' : 'NEW_ITEM_UNIT') | translate }}">
+</acc-page-header-bar>
+<mat-card class="acc-section round-borders margin-md-a">
+  <form #itemUnitForm="ngForm" (ngSubmit)="itemUnitForm.valid && onSubmit()" class="form">
+
+    <mat-card-content>
+      <div class="error" *ngFor="let error of errors">
+        {{ error | serverTranslate : lang }}
+      </div>
+      <acc-loading *ngIf="isLoading"></acc-loading>
+      <mat-form-field class="input margin-md-t-b">
+        <input matInput [(ngModel)]="itemUnit.name" name="name" placeholder="{{ 'ITEM_UNIT_NAME' | translate }}"
+          required>
+      </mat-form-field>
+      <mat-form-field class="input margin-md-t-b">
+        <input matInput [(ngModel)]="itemUnit.numberOfItems" name="numberOfItems" type="number" placeholder="{{ 'ITEM_UNIT_NUM_ITEMS' | translate }}">
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="flex fill padding-md-a end-h">
+        <button type="submit" mat-raised-button color="primary">{{ 'SAVE' |
+          translate}}</button>
+        <button type="button" [routerLink]="(itemUnitId ? ['../../'] : ['../'])" mat-raised-button color="accent">{{ 'BACK' |
+          translate}}</button>
+
+      </div>
+    </mat-card-actions>
+  </form>
+
+</mat-card>

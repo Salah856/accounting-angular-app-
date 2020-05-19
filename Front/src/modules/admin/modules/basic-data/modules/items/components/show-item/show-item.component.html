@@ -1,0 +1,100 @@
+<mat-card class="acc-section round-borders margin-md-a">
+  <mat-card-header class="flex center-h">
+    <mat-card-title class="section-sub-header flex text-large">{{ 'ITEM_DETAILS' | translate }}</mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content class="margin-md-t-b">
+    <div class="error" *ngFor="let error of errors">
+      {{error | serverTranslate : lang}}
+    </div>
+    <div class="flex column">
+      <div class="flex wrap center-v">
+        <div class="flex padding-md-a data-row fill">
+          <label class="data-row-label padding-sm-l-r">{{'ID' | translate}}</label>
+          <span class="data-row-separator padding-sm-l-r">:</span>
+          <span class="padding-sm-l-r">{{item._id}}</span>
+        </div>
+        <div class="flex padding-md-a data-row fill">
+          <label class="data-row-label padding-sm-l-r">{{'ITEM_NAME' | translate}}</label>
+          <span class="data-row-separator padding-sm-l-r">:</span>
+          <span class="padding-sm-l-r">{{item.name}}</span>
+        </div>
+      </div>
+      <div class="flex wrap center-v">
+        <div class="flex padding-md-a data-row fill">
+          <label class="data-row-label padding-sm-l-r">{{'ITEM_TYPE' | translate}}</label>
+          <span class="data-row-separator padding-sm-l-r">:</span>
+          <span class="padding-sm-l-r">{{item.type?.name}}</span>
+        </div>
+        <div class="flex padding-md-a data-row fill">
+          <label class="data-row-label padding-sm-l-r">{{'ITEM_UNIT' | translate}}</label>
+          <span class="data-row-separator padding-sm-l-r">:</span>
+          <span class="padding-sm-l-r">{{item.unit?.name}}</span>
+        </div>
+      </div>
+
+      <div class="flex wrap center-v">
+        <div class="flex padding-md-a data-row fill">
+          <label class="data-row-label padding-sm-l-r">{{'ITEM_CATEGORY' | translate}}</label>
+          <span class="data-row-separator padding-sm-l-r">:</span>
+          <span class="padding-sm-l-r">{{item.category?.name}}</span>
+        </div>
+        <div class="flex padding-md-a data-row fill">
+          <label class="data-row-label padding-sm-l-r">{{'COMPANY' | translate}}</label>
+          <span class="data-row-separator padding-sm-l-r">:</span>
+          <span class="padding-sm-l-r">{{item.company?.name}}</span>
+        </div>
+      </div>
+      
+      <div class="flex wrap center-v">
+        <div class="flex padding-md-a data-row fill">
+          <label class="data-row-label padding-sm-l-r">{{'ITEM_PURCHASE_PRICE' | translate}}</label>
+          <span class="data-row-separator padding-sm-l-r">:</span>
+          <span class="padding-sm-l-r">{{item.purchasePrice}}</span>
+        </div>
+        <div class="flex padding-md-a data-row fill">
+          <label class="data-row-label padding-sm-l-r">{{'ITEM_SELLING_PRICE' | translate}}</label>
+          <span class="data-row-separator padding-sm-l-r">:</span>
+          <span class="padding-sm-l-r">{{item.sellingPrice}}</span>
+        </div>
+      </div>
+
+      <div class="flex wrap center-v">
+        <div class="flex padding-md-a data-row fill">
+          <label class="data-row-label padding-sm-l-r">{{'ITEM_DEFECTIVE_PRICE' | translate}}</label>
+          <span class="data-row-separator padding-sm-l-r">:</span>
+          <span class="padding-sm-l-r">{{item.defectivePrice}}</span>
+        </div>
+        <div class="flex padding-md-a data-row fill">
+          <label class="data-row-label padding-sm-l-r">{{'ITEM_WHOLESALE_PRICE' | translate}}</label>
+          <span class="data-row-separator padding-sm-l-r">:</span>
+          <span class="padding-sm-l-r">{{item.wholesalePrice}}</span>
+        </div>
+      </div>
+
+      <div class="flex wrap center-v">
+        <div class="flex padding-md-a data-row fill">
+          <label class="data-row-label padding-sm-l-r">{{'CURRENCY' | translate}}</label>
+          <span class="data-row-separator padding-sm-l-r">:</span>
+          <span class="padding-sm-l-r">{{item.currency?.name}}</span>
+        </div>
+        <div class="flex padding-md-a data-row fill">
+          <label class="data-row-label padding-sm-l-r">{{'ACTIVE' | translate}}</label>
+          <span class="data-row-separator padding-sm-l-r">:</span>
+          <span class="padding-sm-l-r">{{item.active?.label | serverTranslate : lang }}</span>
+        </div>
+      </div>
+      <acc-signature [signature]="item.signature" ></acc-signature>
+    </div>
+    <acc-loading *ngIf="isLoading"></acc-loading>
+  </mat-card-content>
+  <mat-card-actions>
+    <div class="flex fill padding-md-a end-h">
+      <button *ngIf="rights?.PUT" class="margin-sm-l-r" mat-raised-button color="primary" [routerLink]="['../edit', item._id]">{{'EDIT' |
+        translate}}</button>
+      <button *ngIf="rights?.DELETE" class="margin-sm-l-r" mat-raised-button color="warn" (click)="confirmDeleteItem()">{{'DELETE' |
+        translate}}</button>
+      <button class="margin-sm-l-r" mat-raised-button color="accent" [routerLink]="['../']">{{'BACK' | translate}}</button>
+    </div>
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,7 @@
+<acc-page-header-bar title="{{ 'COMPANIES' | translate }}">
+    <button *ngIf="rights?.POST"  mat-raised-button color="primary" routerLink="../add">
+      <mat-icon class="btn-icon">add</mat-icon>
+      {{ 'NEW_COMPANY' | translate }}
+    </button>
+</acc-page-header-bar>
+<acc-list-company></acc-list-company>

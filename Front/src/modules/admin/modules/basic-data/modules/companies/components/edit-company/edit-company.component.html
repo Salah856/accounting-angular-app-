@@ -1,0 +1,31 @@
+<acc-page-header-bar title="{{ (companyId ? 'EDIT_COMPANY' : 'NEW_COMPANY') | translate }}">
+</acc-page-header-bar>
+<mat-card class="acc-section round-borders margin-md-a">
+  <form #companyForm="ngForm" (ngSubmit)="companyForm.valid && onSubmit()" class="form">
+
+    <mat-card-content>
+      <div class="error" *ngFor="let error of errors">
+        {{ error | serverTranslate : lang }}
+      </div>
+      <acc-loading *ngIf="isLoading"></acc-loading>
+      <mat-form-field class="input margin-md-t-b">
+        <input matInput [(ngModel)]="company.name" name="name" placeholder="{{ 'COMPANY_NAME' | translate }}" required>
+      </mat-form-field>
+      <div class="flex margin-sm-a space-between center-v wrap">
+        <span class="margin-md-l-r file-upload-label">{{ 'COMPANY_LOGO' | translate }}</span>
+        <acc-file-upload (fileChanged)="onFileChange($event)" 
+          [noFileLabel]="companyImageLabel"
+          buttonText="UPLOAD_IMAGE" accept="image/*"></acc-file-upload>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="flex fill padding-md-a end-h">
+        <button type="submit" mat-raised-button color="primary">{{ 'SAVE' | translate}}</button>
+        <button type="button" [routerLink]="(companyId ? ['../../'] : ['../'])" mat-raised-button color="accent">{{
+          'BACK' | translate}}</button>
+
+      </div>
+    </mat-card-actions>
+  </form>
+
+</mat-card>

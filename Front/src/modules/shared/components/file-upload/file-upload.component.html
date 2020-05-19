@@ -1,0 +1,9 @@
+<div class="flex center-v margin-tn-l-r wrap" >
+  <input [attr.required] = "required"
+         style="display: none"
+         [accept]="accept" 
+         type="file"  
+         (change)="onFileChanged($event)" #fileInput>
+  <span class="margin-sm-l-r">{{file ? file.name : (noFileLabel | translate) }}</span>
+  <button type="button" mat-stroked-button color="primary" (click)="fileInput.click()">{{buttonText | translate}}</button>
+</div>

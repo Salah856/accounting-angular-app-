@@ -1,0 +1,25 @@
+@import "../../../../theme/variables";
+
+.btn-row {
+  padding: 10px;
+}
+
+.details{
+  margin: 30px;
+
+  .header-label {
+    margin: 10px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+}
+
+.msg{
+  &.error{
+    color: $error-color;
+  }
+}
+
+.msg{
+  text-align: center;
+}

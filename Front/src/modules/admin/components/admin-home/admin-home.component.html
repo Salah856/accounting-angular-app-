@@ -1,0 +1,9 @@
+<acc-header [menuItems]="menuItems"></acc-header>
+<main>
+  <div class="error" *ngFor="let error of errors">
+    {{ error | serverTranslate : lang }}
+  </div>
+  <router-outlet></router-outlet>
+</main>
+<acc-footer></acc-footer>
+<acc-loading *ngIf="isLoading" [roundedOverlay]="false"></acc-loading>

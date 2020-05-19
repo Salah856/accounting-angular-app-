@@ -1,0 +1,10 @@
+@import "../../../../theme/variables";
+
+:host{
+  font-size: 12px;
+  background-color: $header-background-color;
+  border-bottom: 1px solid $header-border-bottom-color;
+  color: $footer-text-color;
+  padding: 0 10px;
+  text-align: center;
+}

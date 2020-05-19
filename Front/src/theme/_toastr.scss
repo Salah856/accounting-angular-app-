@@ -1,0 +1,7 @@
+@import 'variables';
+
+.toast {
+    &.toast-success {
+        background-color: $success-color !important;
+    }
+}

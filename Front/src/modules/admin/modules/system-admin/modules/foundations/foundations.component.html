@@ -1,0 +1,19 @@
+<div class="foundation-container flex column" [class.is-mobile]="mobileQuery.matches">
+    <acc-page-header-bar [sideNav]="snav" sideNavIconOpenToolTip="OPEN_SCOPE"
+    sideNavIconCloseToolTip="CLOSE_SCOPE" title="{{ 'FOUNDATIONS' | translate }}">
+    <button *ngIf="rights?.POST" mat-raised-button color="primary" routerLink="../add">
+      <mat-icon class="btn-icon">add</mat-icon>
+      {{ 'NEW_FOUNDATION' | translate }}
+    </button>
+  </acc-page-header-bar>
+  <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="!(selectedNodeId && mobileQuery.matches) || !mobileQuery.matches" >
+      <mat-nav-list>
+        <acc-scope [selectedNodeId]="selectedNodeId" (nodeClick)="(mobileQuery.matches ? snav.close() : true) && onNodeClick($event)"></acc-scope>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <acc-show-foundation *ngIf="selectedNodeId"></acc-show-foundation>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

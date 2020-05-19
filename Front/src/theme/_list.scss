@@ -1,0 +1,14 @@
+@import 'variables';
+mat-list {
+    &.side-admin-list {
+        .mat-list-item {
+            color: $contrast-color;
+            &:hover, &.mat-list-item-focus, &.active {
+                background-color: $primary-color !important;
+            }
+            .mat-list-item-content {
+                justify-content: center;
+            }
+        }
+    }
+}

@@ -1,0 +1,7 @@
+<acc-page-header-bar title="{{ 'JOBS' | translate }}">
+    <button *ngIf="rights?.POST" mat-raised-button color="primary" routerLink="../add">
+      <mat-icon class="btn-icon">add</mat-icon>
+      {{ 'NEW_JOB' | translate }}
+    </button>
+</acc-page-header-bar>
+<acc-list-job></acc-list-job>

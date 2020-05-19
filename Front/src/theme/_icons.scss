@@ -1,0 +1,31 @@
+@import "./variables";
+.action {
+    color: $action-icon-color;
+    &.edit-icon{
+        background-color: $edit-icon-background-color;
+        &.disabled{
+            background-color: lighten($color: $edit-icon-background-color, $amount: 30%);
+            cursor: default !important;
+            &:hover{
+                opacity: 1 !important;
+            }
+        }
+
+    }
+    &.delete-icon{
+        background-color: $delete-icon-background-color;
+        &.disabled{
+            background-color: lighten($color: $delete-icon-background-color, $amount: 30%);
+            cursor: default !important;
+            opacity: 1 !important;
+        }
+    }
+    &.toggle-icon{
+        border: solid 1px darken(gray, 10%);
+        color: gray;
+        &.enabled{
+            color: $action-icon-color !important;
+            background-color: gray;
+        }
+    }
+}

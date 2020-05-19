@@ -1,0 +1,7 @@
+<acc-page-header-bar title="{{ 'ITEMS' | translate }}">
+    <button *ngIf="rights?.POST" mat-raised-button color="primary" routerLink="../add">
+      <mat-icon class="btn-icon">add</mat-icon>
+      {{ 'NEW_ITEM' | translate }}
+    </button>
+</acc-page-header-bar>
+<acc-list-item></acc-list-item>

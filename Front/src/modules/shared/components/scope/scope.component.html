@@ -1,0 +1,26 @@
+<div class="acc-section">
+  <div class="section-sub-header flex center-h text-large">
+    {{ 'SCOPE' | translate }}
+  </div>
+  <mat-divider></mat-divider>
+  <div class="error" *ngFor="let error of errors">
+    {{ error | serverTranslate : lang }}
+  </div>
+  <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+      <button mat-icon-button disabled></button>
+      <span class="node-name clickable" [class.selected]="selectedNodeId === node.item.id"
+        (click)="onNodeClick(node)">{{node.item.name | serverTranslate : lang}}</span>
+    </mat-tree-node>
+    <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+      <button mat-icon-button [attr.aria-label]="'toggle ' + node.filename" matTreeNodeToggle>
+        <mat-icon class="mat-icon-rtl-mirror clickable">
+          {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+        </mat-icon>
+      </button>
+      <span class="node-name clickable" [class.selected]="selectedNodeId === node.item.id"
+        (click)="onNodeClick(node)">{{node.item.name | serverTranslate : lang}}</span>
+    </mat-tree-node>
+  </mat-tree>
+</div>
+<acc-loading *ngIf="isLoading"></acc-loading>

@@ -1,0 +1,8 @@
+@import '../../../../theme/variables';
+.node-name {
+  font-weight: bold;
+  &.selected {
+    color: $primary-color;
+
+  }
+}

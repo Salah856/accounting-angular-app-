@@ -1,0 +1,35 @@
+<acc-page-header-bar title="{{ (foundationId ? 'EDIT_FOUNDATION' : 'NEW_FOUNDATION') | translate }}">
+</acc-page-header-bar>
+<mat-card class="acc-section round-borders margin-md-a">
+  <form #foundationForm="ngForm" (ngSubmit)="foundationForm.valid && onSubmit()" class="form">
+    <mat-card-content>
+      <div class="error" *ngFor="let error of errors">
+        {{ error | serverTranslate : lang }}
+      </div>
+      <acc-loading *ngIf="isLoading"></acc-loading>
+      <div class="flex wrap center-v">
+        <mat-form-field class="input margin-sm-a">
+          <input matInput [(ngModel)]="foundation.arName" name="arName" placeholder="{{ 'FOUNDATION_AR_NAME' | translate }}" required>
+        </mat-form-field>
+        <mat-form-field class="input margin-sm-a">
+          <input matInput [(ngModel)]="foundation.enName" name="enName" placeholder="{{ 'FOUNDATION_EN_NAME' | translate }}" required>
+        </mat-form-field>
+      </div>
+      <div class="flex wrap center-v">
+        <mat-checkbox class="checkbox card-checkbox margin-sm-l-r" color="primary" name="active" [(ngModel)]="foundation.active">{{
+          'ACTIVE'
+          | translate }}</mat-checkbox>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="flex fill padding-md-a end-h">
+        <button type="submit" mat-raised-button color="primary">{{ 'SAVE' |
+          translate}}</button>
+        <button type="button" [routerLink]="(foundationId ? ['../../'] : ['../'])" mat-raised-button color="accent">{{
+          'BACK' | translate}}</button>
+
+      </div>
+    </mat-card-actions>
+  </form>
+
+</mat-card>

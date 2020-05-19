@@ -1,0 +1,80 @@
+<acc-page-header-bar
+  title="{{ (exchangePermissionId ? 'EDIT_EXCHANGE_PERMISSION' : 'NEW_EXCHANGE_PERMISSION') | translate }}">
+</acc-page-header-bar>
+<mat-card class="acc-section round-borders margin-md-a">
+  <form #exchangePermissionForm="ngForm" (ngSubmit)="exchangePermissionForm.valid && onSubmit()" class="form">
+
+    <mat-card-content>
+      <div class="error" *ngFor="let error of errors">
+        {{ error | serverTranslate : lang }}
+      </div>
+      <acc-loading *ngIf="isLoading"></acc-loading>
+      <div class="flex wrap center-v">
+        <mat-form-field class="input margin-sm-a">
+          <mat-select placeholder="{{ 'STORE' | translate }}" [(ngModel)]="exchangePermission.store" name="store"
+            required>
+            <mat-option *ngFor="let store of exchangePermissionOptions?.stores" [value]="store._id">
+              {{store.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="input margin-sm-a">
+          <input matInput [matDatepicker]="picker" [max]="maxDate"
+            placeholder="{{'EXCHANGE_PERMISSION_DATE' | translate}}" name="date" [(ngModel)]="exchangePermission.date"
+            required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="input margin-sm-a">
+          <input matInput [(ngModel)]="exchangePermission.storeSecretary" name="storeSecretary"
+            placeholder="{{ 'STORE_SECRETARY' | translate }}" required>
+        </mat-form-field>
+      </div>
+      <div class="flex wrap margin-md-b center-v">
+        <mat-form-field class="input textarea-input margin-sm-a">
+          <textarea [(ngModel)]="exchangePermission.notes" name="notes" matInput
+            placeholder="{{ 'NOTES' | translate }}"></textarea>
+        </mat-form-field>
+      </div>
+      <mat-divider></mat-divider>
+      <span class="flex margin-lg-t form-section-header"> {{ ('ITEMS' | translate) + ' : ' }} </span>
+      <div class="flex wrap margin-md-t-b center-v">
+        <mat-form-field class="input margin-sm-a">
+          <mat-select placeholder="{{ 'ITEM' | translate }}" [(ngModel)]="toBeExchangedItem.item" name="item">
+            <mat-option *ngFor="let item of exchangePermissionOptions?.items" [value]="item._id">
+              {{item.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="input margin-sm-a">
+          <input name="quantity" type="number" min="0" matInput [(ngModel)]="toBeExchangedItem.quantity"
+            placeholder="{{ 'QUANTITY' | translate }}">
+        </mat-form-field>
+        <button type="button" [disabled]="!addItemQuantityEnabled" (click)="addItemQuantity()" class="margin-md-a"
+          mat-raised-button color="success">{{'NEW_ITEM_QUANTITY' | translate}}</button>
+      </div>
+
+      <acc-responsive-table *ngIf="exchangedItemsPopulated.length > 0" [data]="exchangedItemsPopulated" [clickable]="false"
+        [lang]="lang" [columns]="columns" [translate]="true" [sortDisabled]="true">
+        <ng-template #column let-value let-index="index" let-item="item">
+          <div class="flex actions-container">
+            <mat-icon class="action delete-icon" matTooltip="{{ 'DELETE' | translate }}"
+              (click)="$event.stopPropagation();removeExchangedItem(item, index)">delete</mat-icon>
+          </div>
+        </ng-template>
+      </acc-responsive-table>
+
+
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="flex fill padding-md-a end-h">
+        <button type="submit" mat-raised-button color="primary">{{ 'SAVE' |
+          translate}}</button>
+        <button type="button" [routerLink]="(exchangePermissionId ? ['../../'] : ['../'])" mat-raised-button
+          color="accent">{{
+          'BACK' | translate}}</button>
+      </div>
+    </mat-card-actions>
+  </form>
+
+</mat-card>

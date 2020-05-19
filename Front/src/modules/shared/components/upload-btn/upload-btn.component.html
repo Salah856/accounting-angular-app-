@@ -1,0 +1,11 @@
+<button [disabled]="disabled" mat-button class="btn outline" (click)="fileInput.click()">
+  <mat-icon class="btn-icon">file_upload</mat-icon>
+  <ng-content></ng-content>
+</button>
+
+<input type="file"
+       name="fileInput"
+       #fileInput
+       class="hidden"
+       accept="{{acceptedExtensions || '*'}}"
+       (change)="onChange(fileInput.files[0]); fileInput.value = ''"/>

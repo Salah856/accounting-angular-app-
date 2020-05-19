@@ -1,0 +1,53 @@
+@import "../../../../theme/variables";
+
+
+:host {
+  height: $header-height;
+  background-color: $header-background-color;
+  border-bottom: 2px solid $header-border-bottom-color;
+  padding-left:3%;
+  padding-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @media (max-width: $header-mobile-menu-breakpoint) {
+    padding-right: 0;
+  }
+
+  @media (max-width: 670px) {
+    padding-left: 2%;
+  }
+
+  @media (max-width: 460px) {
+    padding-left: 0;
+  }
+}
+
+.logo {
+  margin: 10px;
+  height: 30px;
+}
+
+.section {
+  display: flex;
+  align-items: center;
+}
+
+acc-full-menu {
+  display: flex;
+}
+
+acc-mobile-menu {
+  display: none;
+}
+
+@media (max-width: $header-mobile-menu-breakpoint) {
+  acc-full-menu {
+    display: none;
+  }
+
+  acc-mobile-menu {
+    display: flex;
+  }
+}

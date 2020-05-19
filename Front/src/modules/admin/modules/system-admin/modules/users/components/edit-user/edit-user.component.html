@@ -1,0 +1,65 @@
+<acc-page-header-bar title="{{ (userId ? 'EDIT_USER' : 'NEW_USER') | translate }}">
+</acc-page-header-bar>
+<mat-card class="acc-section round-borders margin-md-a">
+  <form #userForm="ngForm" (ngSubmit)="userForm.valid && onSubmit()" class="form">
+
+    <mat-card-content>
+      <div class="error" *ngFor="let error of errors">
+        {{ error | serverTranslate : lang }}
+      </div>
+      <acc-loading *ngIf="isLoading"></acc-loading>
+      <div class="flex wrap center-v">
+        <mat-form-field class="input margin-sm-a">
+          <input matInput [(ngModel)]="user.name" name="name" placeholder="{{ 'USER_FULLNAME' | translate }}" required>
+        </mat-form-field>
+        <mat-form-field class="input margin-sm-a">
+          <input matInput [(ngModel)]="user.username" name="username" placeholder="{{ 'USERNAME' | translate }}" required>
+        </mat-form-field>
+      </div>
+      <div class="flex wrap center-v">
+        <mat-form-field class="input margin-sm-a">
+          <input [(ngModel)]="user.email" name="email" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+$"
+            matInput placeholder="{{ 'EMAIL' | translate }}">
+        </mat-form-field>
+        <mat-form-field class="input margin-sm-a">
+          <input type="password" [(ngModel)]="user.password" name="password" 
+            matInput placeholder="{{ 'PASSWORD' | translate }}" required>
+        </mat-form-field>
+      </div>
+
+      <div class="flex wrap center-v">
+        <mat-form-field class="input margin-sm-a">
+          <mat-chip-list #chipList>
+            <mat-chip color="accent" *ngFor="let phoneNumber of user.phoneNumbers" [selectable]="selectable"
+              [removable]="removable" (removed)="remove(phoneNumber)" selected>
+              {{phoneNumber}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="{{ 'PHONE_NUMBERS' | translate }}" [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="add($event)">
+          </mat-chip-list>
+        </mat-form-field>
+        <mat-checkbox class="checkbox card-checkbox margin-sm-l-r" color="primary" name="active" [(ngModel)]="user.active">{{
+          'ACTIVE'
+          | translate }}</mat-checkbox>
+      </div>
+      <div class="flex margin-sm-a space-between center-v wrap">
+        <span class="margin-md-l-r file-upload-label">{{ 'PROFILE_IMAGE' | translate }}</span>
+        <acc-file-upload (fileChanged)="onFileChange($event)" 
+          [noFileLabel]="userImageLabel"
+          buttonText="UPLOAD_IMAGE" accept="image/*"></acc-file-upload>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="flex fill padding-md-a end-h">
+        <button type="submit" mat-raised-button color="primary">{{ 'SAVE' |
+          translate}}</button>
+        <button type="button" [routerLink]="(userId ? ['../../'] : ['../'])" mat-raised-button color="accent">{{
+          'BACK' | translate}}</button>
+
+      </div>
+    </mat-card-actions>
+  </form>
+
+</mat-card>

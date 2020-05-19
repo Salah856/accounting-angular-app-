@@ -1,0 +1,7 @@
+<acc-page-header-bar title="{{ 'STORES' | translate }}">
+    <button *ngIf="rights?.POST" mat-raised-button color="primary" routerLink="../add">
+      <mat-icon class="btn-icon">add</mat-icon>
+      {{ 'NEW_STORE' | translate }}
+    </button>
+</acc-page-header-bar>
+<acc-list-store></acc-list-store>

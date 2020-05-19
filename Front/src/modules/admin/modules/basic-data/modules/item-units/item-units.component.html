@@ -1,0 +1,7 @@
+<acc-page-header-bar title="{{ 'ITEM_UNITS' | translate }}">
+    <button *ngIf="rights?.POST" mat-raised-button color="primary" routerLink="../add">
+      <mat-icon class="btn-icon">add</mat-icon>
+      {{ 'NEW_ITEM_UNIT' | translate }}
+    </button>
+</acc-page-header-bar>
+<acc-list-item-unit></acc-list-item-unit>

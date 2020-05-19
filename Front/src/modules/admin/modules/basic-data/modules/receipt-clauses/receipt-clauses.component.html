@@ -1,0 +1,7 @@
+<acc-page-header-bar title="{{ 'RECEIPT_CLAUSES' | translate }}">
+    <button *ngIf="rights?.POST" mat-raised-button color="primary" routerLink="../add">
+      <mat-icon class="btn-icon">add</mat-icon>
+      {{ 'NEW_RECEIPT_CLAUSE' | translate }}
+    </button>
+</acc-page-header-bar>
+<acc-list-receipt-clause></acc-list-receipt-clause>

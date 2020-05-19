@@ -1,0 +1,19 @@
+<div class="modal">
+  <div class="modal-header"
+       [ngClass]="{'danger': data.isDanger !== undefined ? data.isDanger : true}">
+    <span class="modal-header-label">{{data.title | translate}}</span>
+    <button mat-icon-button (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="details">
+    <h4 class="header-label">{{data.message | translate}}</h4>
+  </div>
+
+  <div class="horizontal-separator dark"></div>
+  <div class="btn-row">
+    <button class="margin-sm-l-r" mat-raised-button [color] = "data.isDanger ? 'warn' : 'primary'" (click)="confirm()">{{'CONFIRM' | translate}}</button>
+    <button class="margin-sm-l-r" mat-raised-button color="accent" (click)="close()">{{'CANCEL' | translate }}</button>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<acc-page-header-bar title="{{ 'ADDING_REQUESTS' | translate }}">
+    <button *ngIf="rights?.POST" mat-raised-button color="primary" routerLink="../add">
+      <mat-icon class="btn-icon">add</mat-icon>
+      {{ 'NEW_ADDING_REQUEST' | translate }}
+    </button>
+</acc-page-header-bar>
+<acc-list-adding-request></acc-list-adding-request>

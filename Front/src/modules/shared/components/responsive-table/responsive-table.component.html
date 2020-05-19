@@ -1,0 +1,101 @@
+<ng-container *ngIf="displayedData && displayedData.length">
+  <table matSort [matSortDisabled]="sortDisabled" [ngClass]="{'sort-disabled': sortDisabled ,
+       'table-responsive': (layout === 'responsive'),
+       'table-mobile': (layout === 'mobile'),
+       'table-normal': (layout === 'normal'),
+       'no-stripe': !striped }"
+    (matSortChange)="onSort($event)">
+    <thead>
+      <ng-container *ngIf="selectColumns">
+        <mat-icon class="select-columns-btn" [matMenuTriggerFor]="selectColumnsMenu">more_vert</mat-icon>
+
+        <mat-menu #selectColumnsMenu="matMenu" [overlapTrigger]="false">
+          <div class="select-columns-menu">
+            <mat-checkbox color="primary" *ngFor="let column of columns" [disabled]="shownColumns === 3 && !column.hide" [checked]="!column.hide"
+              class="checkbox light" (change)="toggleColumn(column)">{{ translate ? (column.label | translate) :
+              column.label }}</mat-checkbox>
+          </div>
+
+        </mat-menu>
+
+      </ng-container>
+
+      <tr>
+
+        <th *ngIf="checkable">
+          <mat-checkbox color="primary" (change)="toggleAll($event)" [(ngModel)]="allChecked" class="checkbox no-margin light"></mat-checkbox>
+        </th>
+
+        <ng-container *ngFor="let column of columns">
+          <th [style.width]="column.width?column.width:'auto'" *ngIf="!column.hide" [disabled]="!column.sortable"
+            [mat-sort-header]="column.name">
+            <div class="column-label">{{ translate ? (column.label | translate) : column.label }}</div>
+            <mat-icon class="sort-icon" [style.opacity]="column.sortable ? '1' : '0'">sort</mat-icon>
+          </th>
+        </ng-container>
+
+      </tr>
+    </thead>
+    <tbody>
+      <div class="mobile-operations" *ngIf="checkable || !sortDisabled">
+        <div class="mobile-sort" *ngIf="!sortDisabled">
+          <button mat-icon-button [matMenuTriggerFor]="sortMenu">
+            <mat-icon>sort</mat-icon>
+          </button>
+          <mat-menu [overlapTrigger]="false" #sortMenu="matMenu">
+            <ng-container *ngFor="let column of columns">
+              <button [matMenuTriggerData]="{column: column}" [matMenuTriggerFor]="dirMenu" *ngIf="column.sortable"
+                mat-menu-item>
+                <span>{{ translate ? (column.label | translate) : column.label }}</span>
+              </button>
+            </ng-container>
+          </mat-menu>
+          <mat-menu [overlapTrigger]="false" #dirMenu>
+            <ng-template matMenuContent let-column="column">
+              <button (click)="onSortBtnClick(column , 'asc' )" mat-menu-item>{{ translate ? ('ASC' | translate) :
+                'asc' }}</button>
+              <button (click)="onSortBtnClick(column , 'desc')" mat-menu-item>{{ translate ? ('DESC' | translate) :
+                'desc' }}</button>
+            </ng-template>
+          </mat-menu>
+        </div>
+        <mat-checkbox color="primary" *ngIf="checkable" class="checkbox reversed" [(ngModel)]="allChecked" (change)="toggleAll($event)">{{
+          translate ? ('SELECT_ALL' | translate) : 'Select all' }}
+        </mat-checkbox>
+      </div>
+
+
+
+
+      <tr [ngClass]="{'clickable': clickable, 'hoverable': clickable}" (click)="onRowClick(item, rowIdx)" *ngFor="let item of displayedData; let rowIdx=index;" [@listItem]>
+        <td *ngIf="checkable" class="check-td">
+          <mat-checkbox color="primary" (change)="onCheckChange(item)" [checked]="checkValues.has(item)"></mat-checkbox>
+        </td>
+
+        <ng-container *ngFor="let column of columns; let colIdx=index;">
+
+          <td *ngIf="!column.hide" [attr.data-label]=" column.hideLabelInMobile ? '': (translate ? (column.label | translate) : column.label+' : ')"
+            [ngClass]="{'no-Label-row': column.hideLabelInMobile}">
+            <ng-container *ngIf="column.customTemplate else normalColumn">
+              <ng-container *ngTemplateOutlet="columnTemplates[customColumnMap[colIdx]]
+          , context: { $implicit: getItemValue(item, column.name), item: item, index: rowIdx }"></ng-container>
+            </ng-container>
+            <ng-template #normalColumn>
+              {{ column.serverTranslate ?  (getItemValue(item, column.name) | serverTranslate: lang) : getItemValue(item, column.name)  }}
+            </ng-template>
+          </td>
+
+        </ng-container>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <!-- <mat-paginator *ngIf="paging" (page)="onPage($event)" [length]="totalDataSize" [pageSize]="pageSize"
+                 [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+  </mat-paginator> -->
+</ng-container>
+
+<div *ngIf="!displayedData || !displayedData.length" class="no-data">
+  <mat-icon class="msg-icon">info_outline</mat-icon>{{ translate ? ('NO_DATA' | translate) : 'No Data To Display' }}
+</div>

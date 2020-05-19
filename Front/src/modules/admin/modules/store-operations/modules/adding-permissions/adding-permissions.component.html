@@ -1,0 +1,7 @@
+<acc-page-header-bar title="{{ 'ADDING_PERMISSIONS' | translate }}">
+    <button *ngIf="rights?.POST" mat-raised-button color="primary" routerLink="../add">
+      <mat-icon class="btn-icon">add</mat-icon>
+      {{ 'NEW_ADDING_PERMISSION' | translate }}
+    </button>
+</acc-page-header-bar>
+<acc-list-adding-permission></acc-list-adding-permission>

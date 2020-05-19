@@ -1,0 +1,50 @@
+<mat-card class="acc-section round-borders margin-md-a">
+  <mat-card-header class="flex center-h">
+    <mat-card-title class="section-sub-header flex text-large">{{ 'FOUNDATION_DETAILS' | translate }}</mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content class="margin-md-t-b">
+    <div class="error" *ngFor="let error of errors">
+      {{error | serverTranslate : lang}}
+    </div>
+    <div class="flex column">
+      <div class="flex wrap center-v">
+        <div class="flex padding-md-a data-row fill">
+          <label class="data-row-label padding-sm-l-r">{{'ID' | translate}}</label>
+          <span class="data-row-separator padding-sm-l-r">:</span>
+          <span class="padding-sm-l-r">{{foundation._id}}</span>
+        </div>
+        <div class="flex padding-md-a data-row fill">
+          <label class="data-row-label padding-sm-l-r">{{'FOUNDATION_AR_NAME' | translate}}</label>
+          <span class="data-row-separator padding-sm-l-r">:</span>
+          <span class="padding-sm-l-r">{{foundation.arName}}</span>
+        </div>
+      </div>
+      <div class="flex wrap center-v">
+        <div class="flex padding-md-a data-row fill">
+          <label class="data-row-label padding-sm-l-r">{{'FOUNDATION_EN_NAME' | translate}}</label>
+          <span class="data-row-separator padding-sm-l-r">:</span>
+          <span class="padding-sm-l-r">{{foundation.enName}}</span>
+        </div>
+        <div class="flex padding-md-a data-row fill">
+          <label class="data-row-label padding-sm-l-r">{{'ACTIVE' | translate}}</label>
+          <span class="data-row-separator padding-sm-l-r">:</span>
+          <span class="padding-sm-l-r">{{foundation.active?.label | serverTranslate : lang}}</span>
+        </div>
+      </div>
+      <acc-signature [signature]="foundation.signature" ></acc-signature>
+    </div>
+    <acc-loading *ngIf="isLoading"></acc-loading>
+  </mat-card-content>
+  <mat-card-actions>
+    <div class="flex fill padding-md-a end-h">
+      <button *ngIf="rights?.POST" class="margin-sm-l-r" mat-raised-button color="success" 
+        [routerLink]="['../add']" [queryParams]="{parent: foundation._id}" >{{'ADD_CHILD_FOUNDATION' | translate}}</button>  
+      <button *ngIf="rights?.PUT" class="margin-sm-l-r" mat-raised-button color="primary" [routerLink]="['../edit', foundation._id]">{{'EDIT' |
+        translate}}</button>
+      <button *ngIf="rights?.DELETE" class="margin-sm-l-r" mat-raised-button color="warn" (click)="confirmDeleteFoundation()">{{'DELETE' |
+        translate}}</button>
+      <button class="margin-sm-l-r" mat-raised-button color="accent" [routerLink]="['../']">{{'BACK' | translate}}</button>
+    </div>
+  </mat-card-actions>
+</mat-card>

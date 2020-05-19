@@ -1,0 +1,30 @@
+<button class="menu-item icon-only" mat-button color="primary" [matMenuTriggerFor]="mainMenu">
+  <mat-icon>menu</mat-icon>
+</button>
+
+<mat-menu #mainMenu="matMenu" overlapTrigger="false">
+  <ng-container *ngFor="let item of menuItems">
+    <ng-container [ngSwitch]="!!item.subRoutes">
+
+      <button *ngSwitchCase="false" mat-menu-item class="menu-item mobile-menu-item" color="primary" [routerLink]="item.route"
+        routerLinkActive="active">{{item.label | serverTranslate: lang}}
+      </button>
+
+      <ng-container *ngSwitchCase="true">
+
+        <button class="menu-item mobile-menu-item" color="primary" mat-menu-item [matMenuTriggerFor]="subMenu">
+          {{item.label | serverTranslate: lang}}
+        </button>
+
+        <mat-menu #subMenu="matMenu" overlapTrigger="false">
+          <button *ngFor="let subItem of item.subRoutes" routerLinkActive="active" mat-menu-item class="menu-item"
+            [routerLink]="item.route + '/' + subItem.route">{{subItem.label | serverTranslate: lang}}
+          </button>
+        </mat-menu>
+
+      </ng-container>
+
+    </ng-container>
+
+  </ng-container>
+</mat-menu>

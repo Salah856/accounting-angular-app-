@@ -1,0 +1,19 @@
+<div class="flex fill center-v">
+  <mat-form-field class="input margin-sm-a">
+    <mat-select placeholder="{{ placeholder | translate }}" [value]="selectedItem._id" (selectionChange)="onSelectionChange($event)"
+       [required]="required">
+       <mat-option *ngIf="emptyOption" >{{ 'EMPTY_OPTION' | translate }}</mat-option>
+       <mat-option *ngFor="let item of data" [value]="item._id">
+        {{getItemName(item) | serverTranslate: lang}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="flex">
+    <button *ngIf="selectedItem?.parent" (click)="getItemParent()" class="icon-button" type="button" mat-icon-button color="primary">
+      <mat-icon class="flip-icon" >chevron_left</mat-icon>
+    </button>
+    <button *ngIf="selectedItem?.childrenCount > 0" (click)="getItemChildren()" class="icon-button" type="button" mat-icon-button color="primary">
+      <mat-icon class="flip-icon">chevron_right</mat-icon>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+<acc-page-header-bar title="{{ (treasuryId ? 'EDIT_TREASURY' : 'NEW_TREASURY') | translate }}">
+</acc-page-header-bar>
+<mat-card class="acc-section round-borders margin-md-a">
+  <form #treasuryForm="ngForm" (ngSubmit)="treasuryForm.valid && onSubmit()" class="form">
+
+    <mat-card-content>
+      <div class="error" *ngFor="let error of errors">
+        {{ error | serverTranslate : lang }}
+      </div>
+      <acc-loading *ngIf="isLoading"></acc-loading>
+      <div class="flex wrap center-v">
+        <mat-form-field class="input margin-sm-a">
+          <input matInput [(ngModel)]="treasury.name" name="name" placeholder="{{ 'TREASURY_NAME' | translate }}"
+            required>
+        </mat-form-field>
+        <mat-form-field class="input margin-sm-a">
+          <input matInput [matDatepicker]="picker" [max]="maxDate" placeholder="{{'CREATED_AT' | translate}}" name="createdAt"
+            [(ngModel)]="treasury.createdAt" required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="flex wrap center-v">
+        <mat-form-field class="input margin-sm-a">
+          <input [(ngModel)]="treasury.openingBalance" name="openingBalance" type="number" min="0" matInput placeholder="{{ 'OPENING_BALANCE' | translate }}"
+            required>
+        </mat-form-field>
+        <mat-form-field class="input margin-sm-a">
+          <input [(ngModel)]="treasury.currentBalance" name="currentBalance" type="number" min="0" matInput placeholder="{{ 'CURRENT_BALANCE' | translate }}"
+            required>
+        </mat-form-field>
+      </div>
+
+      <div class="flex wrap center-v">
+        <mat-form-field class="input margin-sm-a">
+          <mat-select placeholder="{{ 'CURRENCY' | translate }}" [(ngModel)]="treasury.currency" name="currency"
+            required>
+            <mat-option *ngFor="let currency of treasuryOptions?.currencies" [value]="currency._id">
+              {{currency.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-checkbox class="checkbox card-checkbox margin-sm-l-r" color="primary" name="active" [(ngModel)]="treasury.active">{{
+          'ACTIVE'
+          | translate }}</mat-checkbox>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="flex fill padding-md-a end-h">
+        <button type="submit" mat-raised-button color="primary">{{ 'SAVE' |
+          translate}}</button>
+        <button type="button" [routerLink]="(treasuryId ? ['../../'] : ['../'])" mat-raised-button color="accent">{{
+          'BACK' |
+          translate}}</button>
+
+      </div>
+    </mat-card-actions>
+  </form>
+
+</mat-card>

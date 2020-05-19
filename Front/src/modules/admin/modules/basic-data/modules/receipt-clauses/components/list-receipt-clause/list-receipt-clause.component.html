@@ -1,0 +1,27 @@
+<mat-card class="acc-section round-borders margin-md-a">
+  <mat-card-header class="flex center-h">
+    <mat-card-title class="section-sub-header flex text-large">{{ 'RECEIPT_CLAUSES_LIST' | translate }}</mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content class="margin-md-t-b">
+    <div class="error" *ngFor="let error of errors">
+      {{ error | serverTranslate : lang }}
+    </div>
+    <acc-responsive-table [data]="receiptClauses" [lang]="lang" [columns]="columns" (rowClick)="onRowClick($event)" [translate]="true"
+      [selectColumns]="true" (sort)="onSort($event)">
+      <ng-template #column let-value let-index="index" let-item="item">
+        <div class="flex actions-container">
+          <mat-icon *ngIf="rights?.PUT" class="action edit-icon" matTooltip="{{ 'EDIT' | translate }}" (click)="$event.stopPropagation()"
+            [routerLink]="['../edit', item._id]">edit</mat-icon>
+          <mat-icon *ngIf="rights?.DELETE" class="action delete-icon" matTooltip="{{ 'DELETE' | translate }}" (click)="$event.stopPropagation();confirmDeleteReceiptClause(item, index)">delete</mat-icon>
+        </div>
+      </ng-template>
+    </acc-responsive-table>
+    <acc-loading *ngIf="isLoading"></acc-loading>
+  </mat-card-content>
+  <mat-card-actions>
+    <mat-paginator [length]="totalCount" [showFirstLastButtons]="true" (page)="onPage($event)" [pageSize]="pageSize"
+      [pageSizeOptions]="pageSizeOptions">
+    </mat-paginator>
+  </mat-card-actions>
+</mat-card>

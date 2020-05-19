@@ -1,0 +1,117 @@
+@import '~@angular/material/theming';
+@import 'variables';
+
+
+
+$typography: mat-typography-config(
+  $font-family: $font,
+  $headline: mat-typography-level(32px, 48px, 700)
+);
+
+
+@include mat-core($typography);
+
+$mat-primary-color: (
+  50: lighten($primary-color, 90%),
+  100: lighten($primary-color, 70%),
+  200: lighten($primary-color, 60%),
+  300: lighten($primary-color, 50%),
+  400: lighten($primary-color, 40%),
+  500: lighten($primary-color, 30%),
+  600: lighten($primary-color, 20%),
+  700: lighten($primary-color, 10%),
+  800: lighten($primary-color, 5%),
+  900: lighten($primary-color, 0%),
+  A100: lighten($primary-color, 5%),
+  A200: lighten($primary-color, 10%),
+  A400: lighten($primary-color, 15%),
+  A700: $primary-color,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: white,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+);
+
+$mat-secondary-color: (
+  50: lighten($secondary-color, 90%),
+  100: lighten($secondary-color, 70%),
+  200: lighten($secondary-color, 60%),
+  300: lighten($secondary-color, 50%),
+  400: lighten($secondary-color, 40%),
+  500: lighten($secondary-color, 30%),
+  600: lighten($secondary-color, 20%),
+  700: lighten($secondary-color, 10%),
+  800: lighten($secondary-color, 5%),
+  900: lighten($secondary-color, 0%),
+  A100: lighten($secondary-color, 5%),
+  A200: lighten($secondary-color, 10%),
+  A400: lighten($secondary-color, 15%),
+  A700: $secondary-color,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: white,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+);
+
+$mat-error-color: (
+  50: lighten($error-color, 90%),
+  100: lighten($error-color, 70%),
+  200: lighten($error-color, 60%),
+  300: lighten($error-color, 50%),
+  400: lighten($error-color, 40%),
+  500: lighten($error-color, 30%),
+  600: lighten($error-color, 20%),
+  700: lighten($error-color, 10%),
+  800: lighten($error-color, 5%),
+  900: lighten($error-color, 0%),
+  A100: lighten($error-color, 5%),
+  A200: lighten($error-color, 10%),
+  A400: lighten($error-color, 15%),
+  A700: $error-color,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: white,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+);
+$app-primary: mat-palette($mat-primary-color, A700);
+$app-accent:  mat-palette($mat-secondary-color, A700);
+$app-warn:    mat-palette($mat-error-color, A700);
+$app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
+
+@include angular-material-theme($app-theme);

@@ -1,0 +1,9 @@
+<div class="flex center-v">
+  <button [matTooltip]="sideNav.opened ? (sideNavIconCloseToolTip | translate) : (sideNavIconOpenToolTip | translate)" class="margin-sm-l-r" mat-icon-button *ngIf="sideNav" (click)="sideNav.toggle()">
+    <mat-icon>{{ sideNav.opened ?  'clear' : 'apps'}}</mat-icon>
+  </button>
+  <h1 class="page-header text-xlarge">{{title}}
+    <small class="page-header-subtext">{{subText}}</small>
+  </h1>
+</div>
+<ng-content></ng-content>

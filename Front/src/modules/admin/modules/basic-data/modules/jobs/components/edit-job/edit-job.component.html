@@ -1,0 +1,26 @@
+<acc-page-header-bar title="{{ (jobId ? 'EDIT_JOB' : 'NEW_JOB') | translate }}">
+</acc-page-header-bar>
+<mat-card class="acc-section round-borders margin-md-a">
+  <form #jobForm="ngForm" (ngSubmit)="jobForm.valid && onSubmit()" class="form">
+
+    <mat-card-content>
+      <div class="error" *ngFor="let error of errors">
+        {{ error | serverTranslate : lang }}
+      </div>
+      <acc-loading *ngIf="isLoading"></acc-loading>
+      <mat-form-field class="input margin-md-t-b">
+        <input matInput [(ngModel)]="job.name" name="name" placeholder="{{ 'JOB_NAME' | translate }}" required>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="flex fill padding-md-a end-h">
+        <button type="submit" mat-raised-button color="primary">{{ 'SAVE' |
+          translate}}</button>
+        <button type="button" [routerLink]="(jobId ? ['../../'] : ['../'])" mat-raised-button color="accent">{{ 'BACK'
+          | translate}}</button>
+
+      </div>
+    </mat-card-actions>
+  </form>
+
+</mat-card>

@@ -1,0 +1,34 @@
+@import 'variables';
+
+.acc-accordion {
+    flex: 1;
+    mat-expansion-panel {
+        mat-expansion-panel-header { 
+            font-size: $font-medium-size;
+            mat-panel-title { 
+                font-size: $font-medium-size;
+            }   
+            .mat-expansion-indicator::after {
+                font-size: $font-medium-size;
+
+            }
+        }
+        &.mat-expanded {
+            mat-expansion-panel-header {
+                background-color: $primary-color !important;
+                mat-panel-title { 
+                    color: $contrast-color !important;            
+                }
+                .mat-expansion-indicator::after {
+                    color: $contrast-color !important;            
+
+                }
+            }
+        }
+        mat-expansion-panel-header {
+            color: $dark-grey;
+        }
+    }
+
+
+}

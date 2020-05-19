@@ -1,0 +1,25 @@
+<ng-container *ngFor="let item of menuItems">
+  <ng-container [ngSwitch]="!!item.subRoutes">
+
+    <button *ngSwitchCase="false" class="menu-item" mat-button color="primary" [routerLink]="item.route"
+      routerLinkActive="active">{{item.label | serverTranslate: lang}}
+    </button>
+
+    <ng-container *ngSwitchCase="true">
+
+      <button  class="menu-item" mat-button color="primary" [matMenuTriggerFor]="subMenu">
+        {{item.label | serverTranslate: lang}}
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+
+      <mat-menu #subMenu="matMenu" overlapTrigger="false">
+        <button *ngFor="let subItem of item.subRoutes" class="menu-item" routerLinkActive="active" mat-menu-item
+          [routerLink]="item.route + '/' + subItem.route">{{subItem.label | serverTranslate: lang}}
+        </button>
+      </mat-menu>
+
+    </ng-container>
+
+  </ng-container>
+
+</ng-container>

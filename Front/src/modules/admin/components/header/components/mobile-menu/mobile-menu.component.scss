@@ -1,0 +1,9 @@
+.menu-item{
+  &.mobile-menu-item{
+    min-width: 185px;
+
+    @media (max-width: 400px) {
+      min-width: 150px;
+    }
+  }
+}

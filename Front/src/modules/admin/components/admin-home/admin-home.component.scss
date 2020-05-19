@@ -1,0 +1,13 @@
+@import '../../../../theme/variables';
+:host{
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main{
+  flex-grow: 1;
+  position: relative;
+  background-color: $section-grey;
+}

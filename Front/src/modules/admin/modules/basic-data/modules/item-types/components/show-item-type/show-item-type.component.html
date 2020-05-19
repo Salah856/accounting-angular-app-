@@ -1,0 +1,33 @@
+<mat-card class="acc-section round-borders margin-md-a">
+  <mat-card-header class="flex center-h">
+    <mat-card-title class="section-sub-header flex text-large">{{ 'ITEM_TYPE_DETAILS' | translate }}</mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content class="margin-md-t-b">
+    <div class="error" *ngFor="let error of errors">
+      {{error | serverTranslate : lang}}
+    </div>
+    <div class="flex column">
+      <div class="flex padding-md-a data-row">
+        <label class="data-row-label padding-sm-l-r">{{'ID' | translate}}</label>
+        <span class="data-row-separator padding-sm-l-r">:</span>
+        <span class="padding-sm-l-r">{{itemType._id}}</span>
+      </div>
+      <div class="flex padding-md-a data-row">
+        <label class="data-row-label padding-sm-l-r">{{'ITEM_TYPE_NAME' | translate}}</label>
+        <span class="data-row-separator padding-sm-l-r">:</span>
+        <span class="padding-sm-l-r">{{itemType.name}}</span>
+      </div>
+      <acc-signature [signature]="itemType.signature" ></acc-signature>
+
+    </div>
+    <acc-loading *ngIf="isLoading"></acc-loading>
+  </mat-card-content>
+  <mat-card-actions>
+    <div class="flex fill padding-md-a end-h">
+      <button *ngIf="rights?.PUT" class="margin-sm-l-r" mat-raised-button color="primary" [routerLink]="['../edit', itemType._id]">{{'EDIT' | translate}}</button>
+      <button *ngIf="rights?.DELETE" class="margin-sm-l-r" mat-raised-button color="warn" (click)="confirmDeleteItemType()">{{'DELETE' | translate}}</button>
+      <button class="margin-sm-l-r" mat-raised-button color="accent" [routerLink]="['../']">{{'BACK' | translate}}</button>
+    </div>
+  </mat-card-actions>
+</mat-card>
